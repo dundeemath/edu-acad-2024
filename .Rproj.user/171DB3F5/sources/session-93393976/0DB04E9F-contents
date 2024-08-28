@@ -11,9 +11,6 @@ execute:
   warning: true
 format: 
   revealjs
-project:
-  type: website
-  output-dir: docs
 ---
 
 ## Quarto
