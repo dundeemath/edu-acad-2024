@@ -2,16 +2,15 @@
 title: "Experiential Learning in Mathematics"
 date: 2024-09-04
 author: "Eric J. Hall, John McDermott, Ewa Bieniecka"
-
-embed-resources: true
-lang: en
-execute:
-  echo: true
-  error: true
-  warning: true
-format: 
-  revealjs
+format: revealjs
 ---
+
+```{r}
+#| echo: false
+#| output: false
+library(tidyverse)
+library(fontawesome)
+```
 
 ## Quarto
 

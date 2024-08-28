@@ -4,17 +4,27 @@ project:
 
 website:
   title: "Experiential Learning in Mathematics"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
 
-format:
-  html:
-    theme: cosmo
-    css: styles.css
-    toc: true
+format: 
+  revealjs:
+    html-math-method: mathjax
+    theme: [default, resources/custom.scss]
+    css: resources/fonts.css
+    logo: resources/logo.png
+    footer: ""
+    template-partials:
+      - resources/title-slide.html
+    transition: slide
+    background-transition: fade
+    
+from: markdown+emoji
 
+embed-resources: true
+lang: en
+
+execute:
+  echo: true
+  error: false
+  warning: false
 
 

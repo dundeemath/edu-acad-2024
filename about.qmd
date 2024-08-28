@@ -1,5 +1,0 @@
----
-title: "About"
----
-
-This is a presentation on "Experiential Learning in Mathematics" for the Education Academy Conference 2024 at the University of Dundee. 
