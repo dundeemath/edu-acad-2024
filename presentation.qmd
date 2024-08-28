@@ -4,7 +4,7 @@ date: 2024-09-04
 author: "Eric J. Hall, John McDermott, Ewa Bieniecka"
 
 embed-resources: true
-lang: en-uk
+lang: en
 execute:
   echo: true
   error: true
