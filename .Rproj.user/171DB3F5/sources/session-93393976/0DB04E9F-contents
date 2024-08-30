@@ -1,5 +1,6 @@
 ---
 title: "Experiential Learning in Mathematics"
+conference: "University of Dundee Education Academy Conference 2024"
 date: 2024-09-04
 author: "Eric J. Hall, John McDermott, Ewa Bieniecka"
 format: revealjs
@@ -12,21 +13,19 @@ library(tidyverse)
 library(fontawesome)
 ```
 
-## Quarto
+## Mathematics at Dundee
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+## Evidence of Positive Practice
 
-## Bullets
+## Bias vs Variation
 
-When you click the **Render** button a document will be generated that includes:
 
--   Content authored with markdown
--   Output from executable code
+## Age Guessing: group task \[10 min\]
 
-## Code
+-   Ten cards display a photo of a person unknown to you. These cards will be passed around from group to group.
+-   For each card:
+    -   Estimate the age of the person in the photo in whole years; your group must come up with a single estimate.
+    -   Record your estimate in the attached table.
+-   Please select one person to report your group’s estimates.
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
+## 

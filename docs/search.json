@@ -1,23 +1,30 @@
 [
   {
-    "objectID": "presentation.html#quarto",
-    "href": "presentation.html#quarto",
+    "objectID": "presentation.html#mathematics-at-dundee",
+    "href": "presentation.html#mathematics-at-dundee",
     "title": "Experiential Learning in Mathematics",
-    "section": "Quarto",
-    "text": "Quarto\nQuarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see https://quarto.org/docs/presentations/."
+    "section": "Mathematics at Dundee",
+    "text": "Mathematics at Dundee"
   },
   {
-    "objectID": "presentation.html#bullets",
-    "href": "presentation.html#bullets",
+    "objectID": "presentation.html#evidence-of-positive-practice",
+    "href": "presentation.html#evidence-of-positive-practice",
     "title": "Experiential Learning in Mathematics",
-    "section": "Bullets",
-    "text": "Bullets\nWhen you click the Render button a document will be generated that includes:\n\nContent authored with markdown\nOutput from executable code"
+    "section": "Evidence of Positive Practice",
+    "text": "Evidence of Positive Practice"
   },
   {
-    "objectID": "presentation.html#code",
-    "href": "presentation.html#code",
+    "objectID": "presentation.html#bias-vs-variation",
+    "href": "presentation.html#bias-vs-variation",
     "title": "Experiential Learning in Mathematics",
-    "section": "Code",
-    "text": "Code\nWhen you click the Render button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2"
+    "section": "Bias vs Variation",
+    "text": "Bias vs Variation"
+  },
+  {
+    "objectID": "presentation.html#age-guessing-group-task-10-min",
+    "href": "presentation.html#age-guessing-group-task-10-min",
+    "title": "Experiential Learning in Mathematics",
+    "section": "Age Guessing: group task [10 min]",
+    "text": "Age Guessing: group task [10 min]\n\nTen cards display a photo of a person unknown to you. These cards will be passed around from group to group.\nFor each card:\n\nEstimate the age of the person in the photo in whole years; your group must come up with a single estimate.\nRecord your estimate in the attached table.\n\nPlease select one person to report your group’s estimates."
   }
 ]

@@ -1,0 +1,56 @@
+### Age Guessing Demo
+### 
+
+library(tidyverse)
+
+true <- read_excel("investigations/age-guessing/age_true.xlsx")
+error <- read_excel("investigations/age-guessing/age_error.xlsx")
+
+## Different ways of representing the same information
+## For each, columns represent variables and rows are observations
+
+# wide format (two-way table)
+# here, 6 x 11 tibble: one categoric/factor, rest numeric
+error
+
+# long format (one-way table)
+# here, 60 x 3 tibble: two categoric/factor, two numeric
+error2 <- error |> 
+  pivot_longer(cols = !group, 
+               names_to = "card", 
+               values_to = "error")
+error2
+
+# categories? but `card` and `group` are of type char...
+error2$card <- factor(error2$card, levels = seq(1, 10, 1))
+error2$group <- factor(error2$group)
+
+## Variation in estimate, bias in estimate
+View(error)
+
+
+## Representing variation and bias in estimates
+# First, we want to recover all the guesses (point estimates) for each card
+true$card <- factor(true$card)
+dat <- left_join(x = error2, y = true, by = "card")
+dat <- dat |> mutate(est_age = error + true_age)
+dat 
+
+# Calculating the mean absolute error.
+dat |> 
+  group_by(group) |>
+  summarise(mean_abs_err = mean(abs(error)))
+# Mean absolute error is one measure of variation in estimates.
+# For each group, variation in estimates across all cards differ, but 
+
+# Represent error using boxplots
+dat |>
+  ggplot() + 
+  geom_boxplot(aes(x = error, y = card)) + 
+  labs(title = "Some people look their age, other's don't",
+       subtitle = "Bias in age estimates",
+       x = "Error (estimate - true)",
+       y = "Person",
+       caption = "Data from MA22004")
+# Errors that cluster around large positive values indicate people that look older than they actually are and errors that cluster around large negative values indicate individuals that look younger than they actually are. 
+
