@@ -26,5 +26,12 @@
     "title": "Experiential Learning in Mathematics",
     "section": "Age Guessing: group task [10 min]",
     "text": "Age Guessing: group task [10 min]\n\nTen cards display a photo of a person unknown to you. These cards will be passed around from group to group.\nFor each card:\n\nEstimate the age of the person in the photo in whole years; your group must come up with a single estimate.\nRecord your estimate in the attached table.\n\nPlease select one person to report your group’s estimates."
+  },
+  {
+    "objectID": "presentation.html#section",
+    "href": "presentation.html#section",
+    "title": "Experiential Learning in Mathematics",
+    "section": "",
+    "text": "#| standalone: true\n\nfrom shiny import *\n\napp_ui = ui.page_fluid(\n    ui.input_slider(\"n\", \"N\", 0, 100, 40),\n    ui.output_text_verbatim(\"txt\"),\n)\n\ndef server(input, output, session):\n    @output\n    @render.text\n    def txt():\n        return f\"The value of n*2 is {input.n() * 2}\"\n\napp = App(app_ui, server)"
   }
 ]

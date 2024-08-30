@@ -19,6 +19,9 @@ format:
     
 from: markdown+emoji
 
+filters:
+  - shinylive
+
 embed-resources: true
 lang: en
 

@@ -20,7 +20,6 @@ library(fontawesome)
 ## Bias vs Variation
 
 
-
 ## Age Guessing: group task \[10 min\]
 
 -   Ten cards display a photo of a person unknown to you. These cards will be passed around from group to group.
@@ -28,3 +27,25 @@ library(fontawesome)
     -   Estimate the age of the person in the photo in whole years; your group must come up with a single estimate.
     -   Record your estimate in the attached table.
 -   Please select one person to report your group’s estimates.
+
+## 
+
+```{shinylive-python}
+#| standalone: true
+
+from shiny import *
+
+app_ui = ui.page_fluid(
+    ui.input_slider("n", "N", 0, 100, 40),
+    ui.output_text_verbatim("txt"),
+)
+
+def server(input, output, session):
+    @output
+    @render.text
+    def txt():
+        return f"The value of n*2 is {input.n() * 2}"
+
+app = App(app_ui, server)
+
+```
