@@ -414,12 +414,12 @@
 <li><em>Scientific computing</em> woven throughout UG programme</li>
 <li>Year 4 project module (2 semesters)</li>
 <li>Work placement module</li>
-<li>Encouraging students to “tinker” from the start (and earlier) https://dundeemath.github.io/Admissions/ <div id="id=" "="" class="qrcode"></div>
+<li>Encouraging students to “tinker” from the start (and earlier) <a href="https://dundeemath.github.io/Admissions/" class="uri">https://dundeemath.github.io/Admissions/</a> <div id="id=" "="" class="qrcode"></div>
 <script type="text/javascript">
 (function() {
   var script = document.currentScript;
   var qrcode = script.previousElementSibling;
-  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":"100","text":"https://dundeemath.github.io/Admissions/","height":"100","colorDark":"#4365e2"});
+  qrcode.qrcode = new QRCode(qrcode, {"width":"100","colorLight":"#ffffff","height":"100","text":"https://dundeemath.github.io/Admissions/","colorDark":"#4365e2"});
   script.remove();
 })();
 </script>
@@ -460,7 +460,19 @@
 <section id="evidence-of-success" class="slide level2">
 <h2>Evidence of success</h2>
 
-<img data-src="images/survey.jpeg" alt="Results of end of module survey for MA22004 Stats 2 from 2024 (response rate 60%) indicate that 100% of studetns agreed with the statement 'On campus teaching was interactive." class="r-stretch"><p>Our premise: if this can be achieved in a mathematics module, it can be achieved anywhere!</p>
+<img data-src="images/survey.jpeg" alt="Results of end of module survey for MA22004 Stats 2 from 2024 (response rate 60%) indicate that 100% of studetns agreed with the statement 'On campus teaching was interactive." class="r-stretch"><div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Our premise:</strong></p>
+</div>
+<div class="callout-content">
+<p>If this can be achieved in mathematics, then it can be achieved in any discipline!</p>
+</div>
+</div>
+</div>
 </section>
 <section id="now-for-some-fun" class="slide level2">
 <h2>Now for some fun …</h2>
@@ -509,6 +521,22 @@
 <li>Please select one person to report your group’s estimates.</li>
 </ul>
 </section>
+<section id="discussion" class="slide level2 center">
+<h2>Discussion</h2>
+<p>What were your estimation strategies?</p>
+</section>
+<section id="the-big-reveal" class="slide level2">
+<h2>The big reveal<sup>1</sup></h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Data from UTKFace dataset <a href="https://susanqq.github.io/UTKFace/" class="uri">https://susanqq.github.io/UTKFace/</a>.</p></li></ol></aside></section>
 <section id="your-estimates" class="slide level2">
 <h2>Your estimates</h2>
 <div class="sourceCode" id="cb1" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>#| standalone: true</span>
@@ -534,17 +562,17 @@
 <span id="cb1-21"><a></a>    matrixInput("mat",</span>
 <span id="cb1-22"><a></a>                value = m,</span>
 <span id="cb1-23"><a></a>                inputClass = "numeric",</span>
-<span id="cb1-24"><a></a>                rows = list(names = TRUE, extend = FALSE), # editableNames = TRUE</span>
+<span id="cb1-24"><a></a>                rows = list(names = TRUE, extend = FALSE), </span>
 <span id="cb1-25"><a></a>                cols = list(names = TRUE, extend = FALSE)),</span>
-<span id="cb1-26"><a></a>    fill=TRUE,</span>
-<span id="cb1-27"><a></a>    width=600</span>
-<span id="cb1-28"><a></a>  ),</span>
-<span id="cb1-29"><a></a>  fillable = TRUE,</span>
-<span id="cb1-30"><a></a>  fillable_mobile = TRUE,</span>
-<span id="cb1-31"><a></a>  # Main panel for displaying outputs ----</span>
-<span id="cb1-32"><a></a>  # Output: A tabset that combines three panels ----</span>
-<span id="cb1-33"><a></a>  navset_card_underline(</span>
-<span id="cb1-34"><a></a>    # nav_panel("True ages", tableOutput("truth")),</span>
+<span id="cb1-26"><a></a>    fill = TRUE,</span>
+<span id="cb1-27"><a></a>    fillable = TRUE,</span>
+<span id="cb1-28"><a></a>    width = 600</span>
+<span id="cb1-29"><a></a>  ),</span>
+<span id="cb1-30"><a></a>  fillable = TRUE,</span>
+<span id="cb1-31"><a></a>  fillable_mobile = TRUE,</span>
+<span id="cb1-32"><a></a>  # Main panel for displaying outputs ----</span>
+<span id="cb1-33"><a></a>  # Output: A tabset that combines three panels ----</span>
+<span id="cb1-34"><a></a>  navset_card_underline(</span>
 <span id="cb1-35"><a></a>    nav_panel("Data", tableOutput("data")),</span>
 <span id="cb1-36"><a></a>    nav_panel("Variation", tableOutput("variation")),</span>
 <span id="cb1-37"><a></a>    nav_panel("Bias", plotOutput("bias"))</span>
@@ -554,52 +582,47 @@
 <span id="cb1-41"><a></a></span>
 <span id="cb1-42"><a></a># Define server logic ----</span>
 <span id="cb1-43"><a></a>server &lt;- function(input, output, session) {</span>
-<span id="cb1-44"><a></a>  </span>
-<span id="cb1-45"><a></a>  rv &lt;- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf("%s", seq(1:10)), c(LETTERS[1:6])))))</span>
-<span id="cb1-46"><a></a>  </span>
-<span id="cb1-47"><a></a>  dat &lt;- reactive({</span>
-<span id="cb1-48"><a></a>    tibble(group = factor(rep(LETTERS[1:6],10)), </span>
-<span id="cb1-49"><a></a>           card = factor(sort(rep(1:10, 6))),</span>
-<span id="cb1-50"><a></a>           est_age = c(as.integer(input$mat)),</span>
-<span id="cb1-51"><a></a>           true_age = c(rv$truthmat),</span>
-<span id="cb1-52"><a></a>           error = c(as.integer(input$mat) - rv$truthmat))</span>
-<span id="cb1-53"><a></a>  })</span>
-<span id="cb1-54"><a></a>  </span>
-<span id="cb1-55"><a></a>  output$data &lt;- renderTable({</span>
-<span id="cb1-56"><a></a>    dat() |&gt; as.data.frame()</span>
-<span id="cb1-57"><a></a>  }, rownames = FALSE, colnames = TRUE)</span>
-<span id="cb1-58"><a></a>  </span>
-<span id="cb1-59"><a></a>  output$variation &lt;- renderTable({</span>
-<span id="cb1-60"><a></a>    dat() |&gt; </span>
-<span id="cb1-61"><a></a>      group_by(.data$group) |&gt;</span>
-<span id="cb1-62"><a></a>      summarise(mean_abs_err = mean(abs(.data$error))) |&gt;</span>
-<span id="cb1-63"><a></a>      as.data.frame()</span>
-<span id="cb1-64"><a></a>  }, rownames = FALSE, colnames = TRUE)</span>
-<span id="cb1-65"><a></a>  </span>
-<span id="cb1-66"><a></a>  output$bias &lt;- renderPlot({</span>
-<span id="cb1-67"><a></a>    dat() |&gt;</span>
-<span id="cb1-68"><a></a>      ggplot() + </span>
-<span id="cb1-69"><a></a>      geom_boxplot(aes(y = .data$error, x = .data$card)) + </span>
-<span id="cb1-70"><a></a>      labs(title = "Bias in age estimates (error &lt; 0 then 'look younger', error &gt; 0 then 'look older')",</span>
-<span id="cb1-71"><a></a>           y = "Error (est_age - true_age)",</span>
-<span id="cb1-72"><a></a>           x = "Person (card)") +</span>
-<span id="cb1-73"><a></a>      theme_classic(base_size = 18)</span>
-<span id="cb1-74"><a></a>  })</span>
-<span id="cb1-75"><a></a>}</span>
-<span id="cb1-76"><a></a></span>
-<span id="cb1-77"><a></a># Create Shiny app ----</span>
-<span id="cb1-78"><a></a>shinyApp(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-44"><a></a>  rv &lt;- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf("%s", seq(1:10)), c(LETTERS[1:6])))))</span>
+<span id="cb1-45"><a></a>  </span>
+<span id="cb1-46"><a></a>  dat &lt;- reactive({</span>
+<span id="cb1-47"><a></a>    tibble(group = factor(rep(LETTERS[1:6],10)), </span>
+<span id="cb1-48"><a></a>           card = factor(sort(rep(1:10, 6))),</span>
+<span id="cb1-49"><a></a>           est_age = c(as.integer(input$mat)),</span>
+<span id="cb1-50"><a></a>           true_age = c(rv$truthmat),</span>
+<span id="cb1-51"><a></a>           error = c(as.integer(input$mat) - rv$truthmat))</span>
+<span id="cb1-52"><a></a>  })</span>
+<span id="cb1-53"><a></a>  </span>
+<span id="cb1-54"><a></a>  output$data &lt;- renderTable({</span>
+<span id="cb1-55"><a></a>    dat() |&gt; as.data.frame()</span>
+<span id="cb1-56"><a></a>  }, rownames = FALSE, colnames = TRUE)</span>
+<span id="cb1-57"><a></a>  </span>
+<span id="cb1-58"><a></a>  output$variation &lt;- renderTable({</span>
+<span id="cb1-59"><a></a>    dat() |&gt; </span>
+<span id="cb1-60"><a></a>      group_by(.data$group) |&gt;</span>
+<span id="cb1-61"><a></a>      summarise(mean_abs_err = mean(abs(.data$error))) |&gt;</span>
+<span id="cb1-62"><a></a>      as.data.frame()</span>
+<span id="cb1-63"><a></a>  }, rownames = FALSE, colnames = TRUE)</span>
+<span id="cb1-64"><a></a>  </span>
+<span id="cb1-65"><a></a>  output$bias &lt;- renderPlot({</span>
+<span id="cb1-66"><a></a>    dat() |&gt;</span>
+<span id="cb1-67"><a></a>      ggplot() + </span>
+<span id="cb1-68"><a></a>      geom_boxplot(aes(y = .data$error, x = .data$card)) + </span>
+<span id="cb1-69"><a></a>      labs(title = "Bias in age estimates (error &lt; 0 then 'look younger', error &gt; 0 then 'look older')",</span>
+<span id="cb1-70"><a></a>           y = "Error (est_age - true_age)",</span>
+<span id="cb1-71"><a></a>           x = "Person (card)") +</span>
+<span id="cb1-72"><a></a>      theme_classic(base_size = 18)</span>
+<span id="cb1-73"><a></a>  })</span>
+<span id="cb1-74"><a></a>}</span>
+<span id="cb1-75"><a></a></span>
+<span id="cb1-76"><a></a># Create Shiny app ----</span>
+<span id="cb1-77"><a></a>shinyApp(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="the-big-reveal" class="slide level2">
-<h2>The big reveal</h2>
-
-<img data-src="presentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>We’ve highlighted learning design efforts in Mathematics to embed experiential learning activities aligned with intended learning outcomes in our undergraduate modules.</li>
+<li>We’ve highlighted learning design efforts in Mathematics to embed experiential learning activities in our undergraduate modules.</li>
+<li>These hands-on activities are aligned with intended learning outcomes.</li>
 <li>You have explored the concepts of bias (inaccuracy) and variation (imprecision) in a statistical estimator through an experiential learning activity. Well done!</li>
-<li></li>
 </ul>
 
 <div class="quarto-auto-generated-content">
@@ -609,6 +632,7 @@
 </div>
 </div>
 </section>
+
     </div>
   </div>
 

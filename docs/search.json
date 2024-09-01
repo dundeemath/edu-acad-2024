@@ -18,7 +18,7 @@
     "href": "presentation.html#evidence-of-success",
     "title": "Experiential Learning in Mathematics",
     "section": "Evidence of success",
-    "text": "Evidence of success\n\nOur premise: if this can be achieved in a mathematics module, it can be achieved anywhere!"
+    "text": "Evidence of success\n\n\n\n\n\n\n\nOur premise:\n\n\nIf this can be achieved in mathematics, then it can be achieved in any discipline!"
   },
   {
     "objectID": "presentation.html#now-for-some-fun",
@@ -49,24 +49,31 @@
     "text": "Age Guessing: group task (10 min)\n\nTen cards display a photo of a person unknown to you. These cards will be passed around from group to group.\nFor each card:\n\nEstimate the age of the person in the photo in whole years; your group must come up with a single estimate.\nRecord your estimate in the table provided.\n\nPlease select one person to report your group’s estimates."
   },
   {
-    "objectID": "presentation.html#your-estimates",
-    "href": "presentation.html#your-estimates",
+    "objectID": "presentation.html#discussion",
+    "href": "presentation.html#discussion",
     "title": "Experiential Learning in Mathematics",
-    "section": "Your estimates",
-    "text": "Your estimates\n#| standalone: true\n#| viewerHeight: 500\n\nlibrary(shiny)\nlibrary(shinyMatrix)\nlibrary(bslib)\nlibrary(tibble)\nlibrary(tidyr)\nlibrary(readr)\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(ggplot2)\n\n# Define UI for random distribution app ----\n# Sidebar layout with input and output definitions ----\n\nm &lt;- matrix(rep(NA, 60), 6, 10, dimnames = list(c(LETTERS[1:6]), sprintf(\"%s\", seq(1:10))))\n\nui &lt;- page_sidebar(\n  sidebar = sidebar(\n    title = \"Estimated age (est_age) for each card by group\",\n    matrixInput(\"mat\",\n                value = m,\n                inputClass = \"numeric\",\n                rows = list(names = TRUE, extend = FALSE), # editableNames = TRUE\n                cols = list(names = TRUE, extend = FALSE)),\n    fill=TRUE,\n    width=600\n  ),\n  fillable = TRUE,\n  fillable_mobile = TRUE,\n  # Main panel for displaying outputs ----\n  # Output: A tabset that combines three panels ----\n  navset_card_underline(\n    # nav_panel(\"True ages\", tableOutput(\"truth\")),\n    nav_panel(\"Data\", tableOutput(\"data\")),\n    nav_panel(\"Variation\", tableOutput(\"variation\")),\n    nav_panel(\"Bias\", plotOutput(\"bias\"))\n  )\n)\n\n\n# Define server logic ----\nserver &lt;- function(input, output, session) {\n  \n  rv &lt;- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf(\"%s\", seq(1:10)), c(LETTERS[1:6])))))\n  \n  dat &lt;- reactive({\n    tibble(group = factor(rep(LETTERS[1:6],10)), \n           card = factor(sort(rep(1:10, 6))),\n           est_age = c(as.integer(input$mat)),\n           true_age = c(rv$truthmat),\n           error = c(as.integer(input$mat) - rv$truthmat))\n  })\n  \n  output$data &lt;- renderTable({\n    dat() |&gt; as.data.frame()\n  }, rownames = FALSE, colnames = TRUE)\n  \n  output$variation &lt;- renderTable({\n    dat() |&gt; \n      group_by(.data$group) |&gt;\n      summarise(mean_abs_err = mean(abs(.data$error))) |&gt;\n      as.data.frame()\n  }, rownames = FALSE, colnames = TRUE)\n  \n  output$bias &lt;- renderPlot({\n    dat() |&gt;\n      ggplot() + \n      geom_boxplot(aes(y = .data$error, x = .data$card)) + \n      labs(title = \"Bias in age estimates (error &lt; 0 then 'look younger', error &gt; 0 then 'look older')\",\n           y = \"Error (est_age - true_age)\",\n           x = \"Person (card)\") +\n      theme_classic(base_size = 18)\n  })\n}\n\n# Create Shiny app ----\nshinyApp(ui, server)"
+    "section": "Discussion",
+    "text": "Discussion\nWhat were your estimation strategies?"
   },
   {
     "objectID": "presentation.html#the-big-reveal",
     "href": "presentation.html#the-big-reveal",
     "title": "Experiential Learning in Mathematics",
-    "section": "The big reveal",
-    "text": "The big reveal"
+    "section": "The big reveal1",
+    "text": "The big reveal1\n\n\n\n\n\n\n\n\n\nData from UTKFace dataset https://susanqq.github.io/UTKFace/."
+  },
+  {
+    "objectID": "presentation.html#your-estimates",
+    "href": "presentation.html#your-estimates",
+    "title": "Experiential Learning in Mathematics",
+    "section": "Your estimates",
+    "text": "Your estimates\n#| standalone: true\n#| viewerHeight: 500\n\nlibrary(shiny)\nlibrary(shinyMatrix)\nlibrary(bslib)\nlibrary(tibble)\nlibrary(tidyr)\nlibrary(readr)\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(ggplot2)\n\n# Define UI for random distribution app ----\n# Sidebar layout with input and output definitions ----\n\nm &lt;- matrix(rep(NA, 60), 6, 10, dimnames = list(c(LETTERS[1:6]), sprintf(\"%s\", seq(1:10))))\n\nui &lt;- page_sidebar(\n  sidebar = sidebar(\n    title = \"Estimated age (est_age) for each card by group\",\n    matrixInput(\"mat\",\n                value = m,\n                inputClass = \"numeric\",\n                rows = list(names = TRUE, extend = FALSE), \n                cols = list(names = TRUE, extend = FALSE)),\n    fill = TRUE,\n    fillable = TRUE,\n    width = 600\n  ),\n  fillable = TRUE,\n  fillable_mobile = TRUE,\n  # Main panel for displaying outputs ----\n  # Output: A tabset that combines three panels ----\n  navset_card_underline(\n    nav_panel(\"Data\", tableOutput(\"data\")),\n    nav_panel(\"Variation\", tableOutput(\"variation\")),\n    nav_panel(\"Bias\", plotOutput(\"bias\"))\n  )\n)\n\n\n# Define server logic ----\nserver &lt;- function(input, output, session) {\n  rv &lt;- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf(\"%s\", seq(1:10)), c(LETTERS[1:6])))))\n  \n  dat &lt;- reactive({\n    tibble(group = factor(rep(LETTERS[1:6],10)), \n           card = factor(sort(rep(1:10, 6))),\n           est_age = c(as.integer(input$mat)),\n           true_age = c(rv$truthmat),\n           error = c(as.integer(input$mat) - rv$truthmat))\n  })\n  \n  output$data &lt;- renderTable({\n    dat() |&gt; as.data.frame()\n  }, rownames = FALSE, colnames = TRUE)\n  \n  output$variation &lt;- renderTable({\n    dat() |&gt; \n      group_by(.data$group) |&gt;\n      summarise(mean_abs_err = mean(abs(.data$error))) |&gt;\n      as.data.frame()\n  }, rownames = FALSE, colnames = TRUE)\n  \n  output$bias &lt;- renderPlot({\n    dat() |&gt;\n      ggplot() + \n      geom_boxplot(aes(y = .data$error, x = .data$card)) + \n      labs(title = \"Bias in age estimates (error &lt; 0 then 'look younger', error &gt; 0 then 'look older')\",\n           y = \"Error (est_age - true_age)\",\n           x = \"Person (card)\") +\n      theme_classic(base_size = 18)\n  })\n}\n\n# Create Shiny app ----\nshinyApp(ui, server)"
   },
   {
     "objectID": "presentation.html#summary",
     "href": "presentation.html#summary",
     "title": "Experiential Learning in Mathematics",
     "section": "Summary",
-    "text": "Summary\n\nWe’ve highlighted learning design efforts in Mathematics to embed experiential learning activities aligned with intended learning outcomes in our undergraduate modules.\nYou have explored the concepts of bias (inaccuracy) and variation (imprecision) in a statistical estimator through an experiential learning activity. Well done!"
+    "text": "Summary\n\nWe’ve highlighted learning design efforts in Mathematics to embed experiential learning activities in our undergraduate modules.\nThese hands-on activities are aligned with intended learning outcomes.\nYou have explored the concepts of bias (inaccuracy) and variation (imprecision) in a statistical estimator through an experiential learning activity. Well done!"
   }
 ]

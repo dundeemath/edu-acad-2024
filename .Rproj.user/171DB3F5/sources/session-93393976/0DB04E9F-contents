@@ -21,7 +21,7 @@ library(ggimage)
 - *Scientific computing* woven throughout UG programme
 - Year 4 project module (2 semesters)
 - Work placement module
-- Encouraging students to "tinker" from the start (and earlier) https://dundeemath.github.io/Admissions/ {{< qrcode https://dundeemath.github.io/Admissions/ qr1 width=100 height=100 colorDark='#4365e2' >}}
+- Encouraging students to "tinker" from the start (and earlier) <https://dundeemath.github.io/Admissions/> {{< qrcode https://dundeemath.github.io/Admissions/ qr1 width=100 height=100 colorDark='#4365e2' >}}
 
 ## Maths field trips! 
 
@@ -37,7 +37,10 @@ library(ggimage)
 
 ![](images/survey.jpeg){fig-alt="Results of end of module survey for MA22004 Stats 2 from 2024 (response rate 60%) indicate that 100% of studetns agreed with the statement 'On campus teaching was interactive."}
 
-Our premise: if this can be achieved in a mathematics module, it can be achieved anywhere!
+::: {.callout-tip}
+### Our premise: 
+If this can be achieved in mathematics, then it can be achieved in any discipline!
+:::
 
 ## Now for some fun ... 
 
@@ -69,6 +72,35 @@ With experiential learning activities of course!
     -   Record your estimate in the table provided.
 -   Please select one person to report your group’s estimates.
 
+##  Discussion {.center}
+What were your estimation strategies?
+
+## The big reveal[^*]
+
+```{r}
+#| echo: false
+
+dat <- read_csv("data/age_true.csv")
+dat$card <- factor(dat$card)
+dat <- dat |> mutate(image = paste0("data/cards/", card, ".jpg"))
+
+dat |> 
+  ggplot(aes(x = true_age, y = position)) + 
+  geom_segment(aes(x = true_age, xend = true_age, y = position, yend = rep(-0.8, 10))) +
+  geom_image(aes(image = image), size = .2, 
+             position = position_jitter(width = 0.0, height = 0.1, seed = 1)) + 
+  labs(x = "True Age (years)") +
+  scale_x_continuous(limits = c(8,87), breaks = c(8, 28, 34, 36, 39, 56, 60, 72, 87)) +
+  scale_y_continuous(limits = c(-0.8,0.6), expand = c(0,0)) +
+  theme_classic() + theme(axis.line.y=element_blank(),
+                          axis.text.y=element_blank(),
+                          axis.ticks.y=element_blank(),
+                          axis.title.y=element_blank(),
+                          axis.text = element_text(size = 14),
+                          axis.title.x = element_text(size = 20))
+```
+
+[^*]: Data from UTKFace dataset <https://susanqq.github.io/UTKFace/>.
 
 ## Your estimates
 
@@ -96,17 +128,17 @@ ui <- page_sidebar(
     matrixInput("mat",
                 value = m,
                 inputClass = "numeric",
-                rows = list(names = TRUE, extend = FALSE), # editableNames = TRUE
+                rows = list(names = TRUE, extend = FALSE), 
                 cols = list(names = TRUE, extend = FALSE)),
-    fill=TRUE,
-    width=600
+    fill = TRUE,
+    fillable = TRUE,
+    width = 600
   ),
   fillable = TRUE,
   fillable_mobile = TRUE,
   # Main panel for displaying outputs ----
   # Output: A tabset that combines three panels ----
   navset_card_underline(
-    # nav_panel("True ages", tableOutput("truth")),
     nav_panel("Data", tableOutput("data")),
     nav_panel("Variation", tableOutput("variation")),
     nav_panel("Bias", plotOutput("bias"))
@@ -116,7 +148,6 @@ ui <- page_sidebar(
 
 # Define server logic ----
 server <- function(input, output, session) {
-  
   rv <- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf("%s", seq(1:10)), c(LETTERS[1:6])))))
   
   dat <- reactive({
@@ -153,33 +184,8 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-## The big reveal
-
-```{r}
-#| echo: false
-
-dat <- read_csv("data/age_true.csv")
-dat$card <- factor(dat$card)
-dat <- dat |> mutate(image = paste0("data/cards/", card, ".jpg"))
-
-dat |> 
-  ggplot(aes(x = true_age, y = position)) + 
-  geom_segment(aes(x = true_age, xend = true_age, y = position, yend = rep(-0.8, 10))) +
-  geom_image(aes(image = image), size = .2, 
-             position = position_jitter(width = 0.0, height = 0.1, seed = 1)) + 
-  labs(x = "True Age (years)") +
-  scale_x_continuous(limits = c(8,87), breaks = c(8, 28, 34, 36, 39, 56, 60, 72, 87)) +
-  scale_y_continuous(limits = c(-0.8,0.6), expand = c(0,0)) +
-  theme_classic() + theme(axis.line.y=element_blank(),
-                          axis.text.y=element_blank(),
-                          axis.ticks.y=element_blank(),
-                          axis.title.y=element_blank(),
-                          axis.text = element_text(size = 14),
-                          axis.title.x = element_text(size = 20))
-```
-
 ## Summary
 
-- We've highlighted learning design efforts in Mathematics to embed experiential learning activities aligned with intended learning outcomes in our undergraduate modules.
+- We've highlighted learning design efforts in Mathematics to embed experiential learning activities in our undergraduate modules.
+- These hands-on activities are aligned with intended learning outcomes.
 - You have explored the concepts of bias (inaccuracy) and variation (imprecision) in a statistical estimator through an experiential learning activity. Well done!
-- 
