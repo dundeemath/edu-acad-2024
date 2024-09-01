@@ -1,97 +1,185 @@
 ---
 title: "Experiential Learning in Mathematics"
 conference: "University of Dundee Education Academy Conference 2024"
+institute: "Mathematics / SSEN"
 date: 2024-09-04
 author: "Eric J. Hall, John McDermott, Ewa Bieniecka"
 format: revealjs
-
-filters:
-  - shinylive
 ---
 
 ```{r}
 #| echo: false
 #| output: false
+library(shinylive)
 library(tidyverse)
 library(fontawesome)
-library(shiny)
-library(shinylive)
-library(shinyMatrix)
+library(ggimage)
 ```
 
-## Mathematics at Dundee
+## Examples of hands-on learning
 
-## Evidence of Positive Practice
+- *Scientific computing* woven throughout UG programme
+- Year 4 project module (2 semesters)
+- Work placement module
+- Encouraging students to "tinker" from the start (and earlier) https://dundeemath.github.io/Admissions/ {{< qrcode https://dundeemath.github.io/Admissions/ qr1 width=100 height=100 colorDark='#4365e2' >}}
 
-## Bias vs Variation
+## Maths field trips! 
 
-## Age Guessing: group task \[10 min\]
+::: {layout="[[60,-5,35], [100]]" layout-valign="bottom"}
+![UoD Botanic Gardens](images/map.001.jpeg){fig-alt="Map of the University of Dundee Botanic Gardens indicatign the location of cyclamen hederifolium."}
+
+![*Cyclamen hederifolium*](images/flower-pink.jpg){fig-alt="Collection of pink cyclamen hederifolium."}
+
+<!-- ![Data collection methodology.](images/botanics.jpg){fig-alt="Field trip data collection methodology for measuring observations of petal width, petal length, and aperture radius." .lightbox} -->
+:::
+
+## Evidence of success
+
+![](images/survey.jpeg){fig-alt="Results of end of module survey for MA22004 Stats 2 from 2024 (response rate 60%) indicate that 100% of studetns agreed with the statement 'On campus teaching was interactive."}
+
+Our premise: if this can be achieved in a mathematics module, it can be achieved anywhere!
+
+## Now for some fun ... 
+
+::: {layout="[[100]]"}
+![](images/statistics-review.jpg){fig-alt="A chalkboard with the word "Statistics" and various drawings related to the topic of statistics, such as formulas for estimators and charts."}
+::: 
+
+## Bias and Variation
+
+- **Error** is the difference between the true value of a quantity and the observed or recorded value.
+- Sources of error can be described as systematic (**bias**) or random (due to chance **variation**).
+- Variation is related to imprecision and bias is related to inaccuracy.
+
+:::{.callout-caution}
+## Pedagogical note
+
+Students often find it difficult to distinguish between bias and variation *in practice*. 
+:::
+
+## How do we support students in learning the distinction between bias and variation in Mathematics at Dundee? {.center}
+
+With experiential learning activities of course!
+
+## Age Guessing: group task (10 min)
 
 -   Ten cards display a photo of a person unknown to you. These cards will be passed around from group to group.
 -   For each card:
     -   Estimate the age of the person in the photo in whole years; your group must come up with a single estimate.
-    -   Record your estimate in the attached table.
+    -   Record your estimate in the table provided.
 -   Please select one person to report your group’s estimates.
 
-## Test
+
+## Your estimates
 
 ```{shinylive-r}
 #| standalone: true
-#| viewerHeight: 520
+#| viewerHeight: 500
 
 library(shiny)
+library(shinyMatrix)
 library(bslib)
+library(tibble)
+library(tidyr)
+library(readr)
+library(dplyr, warn.conflicts = FALSE)
+library(ggplot2)
 
-# Define UI for app that draws a histogram ----
+# Define UI for random distribution app ----
+# Sidebar layout with input and output definitions ----
+
+m <- matrix(rep(NA, 60), 6, 10, dimnames = list(c(LETTERS[1:6]), sprintf("%s", seq(1:10))))
+
 ui <- page_sidebar(
-
-  # App title ----
-  title = "Hello Shiny!",
-
-  # Sidebar panel for inputs ----
   sidebar = sidebar(
-
-    # Input: Slider for the number of bins ----
-    sliderInput(
-      inputId = "bins",
-      label = "Number of bins:",
-      min = 1,
-      max = 50,
-      value = 30
-    )
+    title = "Estimated age (est_age) for each card by group",
+    matrixInput("mat",
+                value = m,
+                inputClass = "numeric",
+                rows = list(names = TRUE, extend = FALSE), # editableNames = TRUE
+                cols = list(names = TRUE, extend = FALSE)),
+    fill=TRUE,
+    width=600
   ),
-
-  # Output: Histogram ----
-  plotOutput(outputId = "distPlot")
+  fillable = TRUE,
+  fillable_mobile = TRUE,
+  # Main panel for displaying outputs ----
+  # Output: A tabset that combines three panels ----
+  navset_card_underline(
+    # nav_panel("True ages", tableOutput("truth")),
+    nav_panel("Data", tableOutput("data")),
+    nav_panel("Variation", tableOutput("variation")),
+    nav_panel("Bias", plotOutput("bias"))
+  )
 )
 
-# Define server logic required to draw a histogram ----
-server <- function(input, output) {
 
-  # Histogram of the Old Faithful Geyser Data ----
-  # with requested number of bins
-  # This expression that generates a histogram is wrapped in a call
-  # to renderPlot to indicate that:
-  #
-  # 1. It is "reactive" and therefore should be automatically
-  #    re-executed when inputs (input$bins) change
-  # 2. Its output type is a plot
-  output$distPlot <- renderPlot({
-    x <- faithful$waiting
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    hist(
-      x,
-      breaks = bins,
-      col = "#75AADB",
-      border = "white",
-      xlab = "Waiting time to next eruption (in mins)",
-      main = "Histogram of waiting times"
-    )
+# Define server logic ----
+server <- function(input, output, session) {
+  
+  rv <- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf("%s", seq(1:10)), c(LETTERS[1:6])))))
+  
+  dat <- reactive({
+    tibble(group = factor(rep(LETTERS[1:6],10)), 
+           card = factor(sort(rep(1:10, 6))),
+           est_age = c(as.integer(input$mat)),
+           true_age = c(rv$truthmat),
+           error = c(as.integer(input$mat) - rv$truthmat))
+  })
+  
+  output$data <- renderTable({
+    dat() |> as.data.frame()
+  }, rownames = FALSE, colnames = TRUE)
+  
+  output$variation <- renderTable({
+    dat() |> 
+      group_by(.data$group) |>
+      summarise(mean_abs_err = mean(abs(.data$error))) |>
+      as.data.frame()
+  }, rownames = FALSE, colnames = TRUE)
+  
+  output$bias <- renderPlot({
+    dat() |>
+      ggplot() + 
+      geom_boxplot(aes(y = .data$error, x = .data$card)) + 
+      labs(title = "Bias in age estimates (error < 0 then 'look younger', error > 0 then 'look older')",
+           y = "Error (est_age - true_age)",
+           x = "Person (card)") +
+      theme_classic(base_size = 18)
   })
 }
 
 # Create Shiny app ----
-shinyApp(ui = ui, server = server)
-
+shinyApp(ui, server)
 ```
+
+## The big reveal
+
+```{r}
+#| echo: false
+
+dat <- read_csv("data/age_true.csv")
+dat$card <- factor(dat$card)
+dat <- dat |> mutate(image = paste0("data/cards/", card, ".jpg"))
+
+dat |> 
+  ggplot(aes(x = true_age, y = position)) + 
+  geom_segment(aes(x = true_age, xend = true_age, y = position, yend = rep(-0.8, 10))) +
+  geom_image(aes(image = image), size = .2, 
+             position = position_jitter(width = 0.0, height = 0.1, seed = 1)) + 
+  labs(x = "True Age (years)") +
+  scale_x_continuous(limits = c(8,87), breaks = c(8, 28, 34, 36, 39, 56, 60, 72, 87)) +
+  scale_y_continuous(limits = c(-0.8,0.6), expand = c(0,0)) +
+  theme_classic() + theme(axis.line.y=element_blank(),
+                          axis.text.y=element_blank(),
+                          axis.ticks.y=element_blank(),
+                          axis.title.y=element_blank(),
+                          axis.text = element_text(size = 14),
+                          axis.title.x = element_text(size = 20))
+```
+
+## Summary
+
+- We've highlighted learning design efforts in Mathematics to embed experiential learning activities aligned with intended learning outcomes in our undergraduate modules.
+- You have explored the concepts of bias (inaccuracy) and variation (imprecision) in a statistical estimator through an experiential learning activity. Well done!
+- 

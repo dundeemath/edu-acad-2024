@@ -1,37 +1,72 @@
 [
   {
-    "objectID": "presentation.html#mathematics-at-dundee",
-    "href": "presentation.html#mathematics-at-dundee",
+    "objectID": "presentation.html#examples-of-hands-on-learning",
+    "href": "presentation.html#examples-of-hands-on-learning",
     "title": "Experiential Learning in Mathematics",
-    "section": "Mathematics at Dundee",
-    "text": "Mathematics at Dundee"
+    "section": "Examples of hands-on learning",
+    "text": "Examples of hands-on learning\n\nScientific computing woven throughout UG programme\nYear 4 project module (2 semesters)\nWork placement module\nEncouraging students to “tinker” from the start (and earlier) https://dundeemath.github.io/Admissions/"
   },
   {
-    "objectID": "presentation.html#evidence-of-positive-practice",
-    "href": "presentation.html#evidence-of-positive-practice",
+    "objectID": "presentation.html#maths-field-trips",
+    "href": "presentation.html#maths-field-trips",
     "title": "Experiential Learning in Mathematics",
-    "section": "Evidence of Positive Practice",
-    "text": "Evidence of Positive Practice"
+    "section": "Maths field trips!",
+    "text": "Maths field trips!\n\n\n\n\n\n\nUoD Botanic Gardens\n\n\n\n\n \n\n\n\n\n\nCyclamen hederifolium"
   },
   {
-    "objectID": "presentation.html#bias-vs-variation",
-    "href": "presentation.html#bias-vs-variation",
+    "objectID": "presentation.html#evidence-of-success",
+    "href": "presentation.html#evidence-of-success",
     "title": "Experiential Learning in Mathematics",
-    "section": "Bias vs Variation",
-    "text": "Bias vs Variation"
+    "section": "Evidence of success",
+    "text": "Evidence of success\n\nOur premise: if this can be achieved in a mathematics module, it can be achieved anywhere!"
+  },
+  {
+    "objectID": "presentation.html#now-for-some-fun",
+    "href": "presentation.html#now-for-some-fun",
+    "title": "Experiential Learning in Mathematics",
+    "section": "Now for some fun …",
+    "text": "Now for some fun …\n\n\n\n{fig-alt=“A chalkboard with the word”Statistics” and various drawings related to the topic of statistics, such as formulas for estimators and charts.”}"
+  },
+  {
+    "objectID": "presentation.html#bias-and-variation",
+    "href": "presentation.html#bias-and-variation",
+    "title": "Experiential Learning in Mathematics",
+    "section": "Bias and Variation",
+    "text": "Bias and Variation\n\nError is the difference between the true value of a quantity and the observed or recorded value.\nSources of error can be described as systematic (bias) or random (due to chance variation).\nVariation is related to imprecision and bias is related to inaccuracy.\n\n\n\n\n\n\n\nPedagogical note\n\n\nStudents often find it difficult to distinguish between bias and variation in practice."
+  },
+  {
+    "objectID": "presentation.html#how-do-we-support-students-in-learning-the-distinction-between-bias-and-variation-in-mathematics-at-dundee",
+    "href": "presentation.html#how-do-we-support-students-in-learning-the-distinction-between-bias-and-variation-in-mathematics-at-dundee",
+    "title": "Experiential Learning in Mathematics",
+    "section": "How do we support students in learning the distinction between bias and variation in Mathematics at Dundee?",
+    "text": "How do we support students in learning the distinction between bias and variation in Mathematics at Dundee?\nWith experiential learning activities of course!"
   },
   {
     "objectID": "presentation.html#age-guessing-group-task-10-min",
     "href": "presentation.html#age-guessing-group-task-10-min",
     "title": "Experiential Learning in Mathematics",
-    "section": "Age Guessing: group task [10 min]",
-    "text": "Age Guessing: group task [10 min]\n\nTen cards display a photo of a person unknown to you. These cards will be passed around from group to group.\nFor each card:\n\nEstimate the age of the person in the photo in whole years; your group must come up with a single estimate.\nRecord your estimate in the attached table.\n\nPlease select one person to report your group’s estimates."
+    "section": "Age Guessing: group task (10 min)",
+    "text": "Age Guessing: group task (10 min)\n\nTen cards display a photo of a person unknown to you. These cards will be passed around from group to group.\nFor each card:\n\nEstimate the age of the person in the photo in whole years; your group must come up with a single estimate.\nRecord your estimate in the table provided.\n\nPlease select one person to report your group’s estimates."
   },
   {
-    "objectID": "presentation.html#test",
-    "href": "presentation.html#test",
+    "objectID": "presentation.html#your-estimates",
+    "href": "presentation.html#your-estimates",
     "title": "Experiential Learning in Mathematics",
-    "section": "Test",
-    "text": "Test\n#| standalone: true\n#| viewerHeight: 520\n\nlibrary(shiny)\nlibrary(bslib)\n\n# Define UI for app that draws a histogram ----\nui &lt;- page_sidebar(\n\n  # App title ----\n  title = \"Hello Shiny!\",\n\n  # Sidebar panel for inputs ----\n  sidebar = sidebar(\n\n    # Input: Slider for the number of bins ----\n    sliderInput(\n      inputId = \"bins\",\n      label = \"Number of bins:\",\n      min = 1,\n      max = 50,\n      value = 30\n    )\n  ),\n\n  # Output: Histogram ----\n  plotOutput(outputId = \"distPlot\")\n)\n\n# Define server logic required to draw a histogram ----\nserver &lt;- function(input, output) {\n\n  # Histogram of the Old Faithful Geyser Data ----\n  # with requested number of bins\n  # This expression that generates a histogram is wrapped in a call\n  # to renderPlot to indicate that:\n  #\n  # 1. It is \"reactive\" and therefore should be automatically\n  #    re-executed when inputs (input$bins) change\n  # 2. Its output type is a plot\n  output$distPlot &lt;- renderPlot({\n    x &lt;- faithful$waiting\n    bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)\n\n    hist(\n      x,\n      breaks = bins,\n      col = \"#75AADB\",\n      border = \"white\",\n      xlab = \"Waiting time to next eruption (in mins)\",\n      main = \"Histogram of waiting times\"\n    )\n  })\n}\n\n# Create Shiny app ----\nshinyApp(ui = ui, server = server)"
+    "section": "Your estimates",
+    "text": "Your estimates\n#| standalone: true\n#| viewerHeight: 500\n\nlibrary(shiny)\nlibrary(shinyMatrix)\nlibrary(bslib)\nlibrary(tibble)\nlibrary(tidyr)\nlibrary(readr)\nlibrary(dplyr, warn.conflicts = FALSE)\nlibrary(ggplot2)\n\n# Define UI for random distribution app ----\n# Sidebar layout with input and output definitions ----\n\nm &lt;- matrix(rep(NA, 60), 6, 10, dimnames = list(c(LETTERS[1:6]), sprintf(\"%s\", seq(1:10))))\n\nui &lt;- page_sidebar(\n  sidebar = sidebar(\n    title = \"Estimated age (est_age) for each card by group\",\n    matrixInput(\"mat\",\n                value = m,\n                inputClass = \"numeric\",\n                rows = list(names = TRUE, extend = FALSE), # editableNames = TRUE\n                cols = list(names = TRUE, extend = FALSE)),\n    fill=TRUE,\n    width=600\n  ),\n  fillable = TRUE,\n  fillable_mobile = TRUE,\n  # Main panel for displaying outputs ----\n  # Output: A tabset that combines three panels ----\n  navset_card_underline(\n    # nav_panel(\"True ages\", tableOutput(\"truth\")),\n    nav_panel(\"Data\", tableOutput(\"data\")),\n    nav_panel(\"Variation\", tableOutput(\"variation\")),\n    nav_panel(\"Bias\", plotOutput(\"bias\"))\n  )\n)\n\n\n# Define server logic ----\nserver &lt;- function(input, output, session) {\n  \n  rv &lt;- reactiveValues(truthmat = t(matrix(rep(c(36L, 57L,  8L, 87L, 60L, 34L, 56L, 28L, 39L, 72L), 6), 10, 6, dimnames = list(sprintf(\"%s\", seq(1:10)), c(LETTERS[1:6])))))\n  \n  dat &lt;- reactive({\n    tibble(group = factor(rep(LETTERS[1:6],10)), \n           card = factor(sort(rep(1:10, 6))),\n           est_age = c(as.integer(input$mat)),\n           true_age = c(rv$truthmat),\n           error = c(as.integer(input$mat) - rv$truthmat))\n  })\n  \n  output$data &lt;- renderTable({\n    dat() |&gt; as.data.frame()\n  }, rownames = FALSE, colnames = TRUE)\n  \n  output$variation &lt;- renderTable({\n    dat() |&gt; \n      group_by(.data$group) |&gt;\n      summarise(mean_abs_err = mean(abs(.data$error))) |&gt;\n      as.data.frame()\n  }, rownames = FALSE, colnames = TRUE)\n  \n  output$bias &lt;- renderPlot({\n    dat() |&gt;\n      ggplot() + \n      geom_boxplot(aes(y = .data$error, x = .data$card)) + \n      labs(title = \"Bias in age estimates (error &lt; 0 then 'look younger', error &gt; 0 then 'look older')\",\n           y = \"Error (est_age - true_age)\",\n           x = \"Person (card)\") +\n      theme_classic(base_size = 18)\n  })\n}\n\n# Create Shiny app ----\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "presentation.html#the-big-reveal",
+    "href": "presentation.html#the-big-reveal",
+    "title": "Experiential Learning in Mathematics",
+    "section": "The big reveal",
+    "text": "The big reveal"
+  },
+  {
+    "objectID": "presentation.html#summary",
+    "href": "presentation.html#summary",
+    "title": "Experiential Learning in Mathematics",
+    "section": "Summary",
+    "text": "Summary\n\nWe’ve highlighted learning design efforts in Mathematics to embed experiential learning activities aligned with intended learning outcomes in our undergraduate modules.\nYou have explored the concepts of bias (inaccuracy) and variation (imprecision) in a statistical estimator through an experiential learning activity. Well done!"
   }
 ]

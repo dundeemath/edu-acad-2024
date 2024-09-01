@@ -3,7 +3,7 @@
     "path": "~/Library/CloudStorage/OneDrive-UniversityofDundee/Scholarship/edu-acad-2024/presentation.qmd",
     "project_path": "presentation.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "2034685359",
     "contents": "",
     "dirty": false,
     "created": 1724850984252.0,
@@ -12,20 +12,21 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "73,17",
-        "scrollLine": "71",
+        "cursorPosition": "147,34",
+        "scrollLine": "139",
         "rmdVisualMode": "false",
         "rmdVisualWrapConfigured": "true",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "200:1"
+        "rmdVisualModeLocation": "200:1",
+        "docOutlineSize": "59"
     },
     "folds": "",
-    "lastKnownWriteTime": 1725013607,
+    "lastKnownWriteTime": 1725219464,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1725013607140,
+    "last_content_update": 1725219464660,
     "read_only": false,
     "read_only_alternatives": []
 }

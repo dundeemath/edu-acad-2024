@@ -29,7 +29,6 @@ $mermaid-label-fg-color: $body-color;
 $mermaid-node-fg-color: $body-color;
 $mermaid-node-bg-color: $bl-color-5;
 
-
 /*-- fonts --*/
 $font-family-sans-serif: 'baxter_sansregular', sans-serif;
 $presentation-heading-font: 'baxter_sansbold', sans-serif;
@@ -47,7 +46,7 @@ $mermaid-font-family: $font-family-sans-serif;
 }
 
 b, strong {
-   color: $hl-color-1 !important;
+   color: $hl-color-1;
    font-weight: bold !important;
 }
 
@@ -105,4 +104,8 @@ b, strong {
   position: absolute; 
   top: -100px; 
   right: -60px;
+}
+
+.callout strong {
+  color: $hl-color-3; 
 }
